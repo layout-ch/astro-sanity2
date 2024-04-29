@@ -2,13 +2,38 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 
-import { t } from "i18n:astro";
+import { getSanity } from "../../lib/api";
+import { getLocale } from "i18n:astro";
+import { getDefaultLocale } from "i18n:astro";
+
+const language = getLocale();
+const defaultLanguage = getDefaultLocale();
+console.log(language);
+
+let query = `[(
+  *[ _type == "home" && language == '${language}'] +
+  *[ _type == "home" && language == '${defaultLanguage}']
+)[0]]`;
+let sections = await getSanity([query]);
 ---
 
-<Layout title={t("pages.home.title")}>
+<Layout title="test">
 	<Header />
 	<main>
-		<h1>{t("pages.home.home")}</h1>
-		<p>{t("pages.home.content")}</p>
+		{
+			sections[0].section.map((section: any) => {
+				switch (section._type) {
+					case "hero":
+						return (
+							<>
+								<h1>{section.title}</h1>
+								<p>{section.text}</p>
+							</>
+						);
+					default:
+						return null;
+				}
+			})
+		}
 	</main>
 </Layout>

@@ -4,6 +4,8 @@ import liciousI18n from "@astrolicious/i18n";
 
 // import { sanityIntegration } from "@sanity/astro";
 
+import sanity from "@sanity/astro";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://test.com",
@@ -28,5 +30,11 @@ export default defineConfig({
           en: "about-us"
         }
       }
-    })]
+    }), sanity(
+      {
+        projectId: 't9cmnozc',
+        dataset: 'production',
+        useCdn: false,
+      }
+    )]
 });
