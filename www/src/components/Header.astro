@@ -1,0 +1,33 @@
+---
+import { getLocalePath } from "i18n:astro";
+import { t } from "i18n:astro";
+import LocaleSwitcher from "./LocaleSwitcher.astro";
+---
+
+<nav>
+    <ul>
+        <li>
+            <a href={getLocalePath("/")}>{t("menu1")}</a>
+        </li>
+        <li>
+            <a href={getLocalePath("/a-propos")}>{t("menu2")}</a>
+        </li>
+    </ul>
+    <LocaleSwitcher />
+</nav>
+
+<style>
+    nav {
+        margin-bottom: 50px;
+        padding: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    ul {
+        width: 100%;
+        display: flex;
+        gap: 20px;
+    }
+</style>

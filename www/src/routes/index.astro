@@ -1,0 +1,14 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+
+import { t } from "i18n:astro";
+---
+
+<Layout title={t("pages.home.title")}>
+	<Header />
+	<main>
+		<h1>{t("pages.home.home")}</h1>
+		<p>{t("pages.home.content")}</p>
+	</main>
+</Layout>
