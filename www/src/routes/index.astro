@@ -8,20 +8,16 @@ import { getDefaultLocale } from "i18n:astro";
 
 const language = getLocale();
 const defaultLanguage = getDefaultLocale();
-console.log(language);
 
-let query = `[(
-  *[ _type == "home" && language == '${language}'] +
-  *[ _type == "home" && language == '${defaultLanguage}']
-)[0]]`;
+let query = `*[ _type == "home" && language == '${language}']`;
 let sections = await getSanity([query]);
+console.log(sections);
 ---
 
 <Layout title="test">
-	<Header />
 	<main>
 		{
-			sections[0].section.map((section: any) => {
+			sections?.[0]?.section.map((section: any) => {
 				switch (section._type) {
 					case "hero":
 						return (

@@ -1,0 +1,19 @@
+---
+import { urlForImage } from "../studio/urlForImage";
+
+const { asset, alt } = Astro.props.node;
+
+const url = urlForImage(asset).url();
+const webpUrl = urlForImage(asset).format("webp").url();
+---
+
+<picture>
+  <source srcset={`${webpUrl}&fit=max&q=20`} type="image/webp" />
+  <img class="responsive__img" src={url} alt={alt} />
+</picture>
+
+<style>
+  .responsive__img {
+    max-width: 100%;
+  }
+</style>

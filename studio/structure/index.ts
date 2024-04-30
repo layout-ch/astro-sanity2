@@ -24,6 +24,8 @@ export const structure: StructureResolver = (S, context) =>
                 // Specify a custom icon
                 icon: HomeIcon,
             }),
-            S.divider()
+            S.divider(),
+            S.documentTypeListItem("blog").title("Blog Posts"),
+
 
         ])

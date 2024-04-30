@@ -9,7 +9,7 @@ const data = getSwitcherData();
     {
         data.map((e) => (
             <option value={e.href} selected={e.locale === locale}>
-                {e.locale.toUpperCase()}
+                {e.locale}
             </option>
         ))
     }

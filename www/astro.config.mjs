@@ -17,11 +17,19 @@ export default defineConfig({
       locales: ["fr", "de", "en"],
       strategy: "prefix",
       sitemap: true,
+      // client: {
+      //   data: true,
+      //   paths: true,
+      // },
       pages: {
         "a-propos": {
           de: "ueber-uns",
           en: "about-us"
-        }
+        },
+        "/blog/[slug]": {
+          de: "/blog/[slug]",
+          en: "/blog/[slug]",
+        },
       }
     }), sanity(
       {

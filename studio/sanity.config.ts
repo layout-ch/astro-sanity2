@@ -4,7 +4,7 @@ import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemaTypes'
 import { structure } from './structure'
 
-import { documentInternationalization } from '@sanity/document-internationalization'
+import { documentInternationalization, DeleteTranslationAction } from '@sanity/document-internationalization'
 
 
 export default defineConfig({
@@ -19,14 +19,27 @@ export default defineConfig({
     // Required configuration
     supportedLanguages: [
       { id: 'fr', title: 'French' },
-      { id: 'de', title: 'Deutsch' },
+      { id: 'de', title: 'German' },
       { id: 'en', title: 'English' }
     ],
-    schemaTypes: ['home'],
+    schemaTypes: ['home', 'blog'],
   })
   ],
 
   schema: {
     types: schemaTypes,
+    templates: (prev) =>
+      prev.filter((template) => !['home', 'blog'].includes(template.id)),
+  },
+  document: {
+    actions: (prev, { schemaType }) => {
+      // Add to the same schema types you use for internationalization
+      if (['home'].includes(schemaType)) {
+        // You might also like to filter out the built-in "delete" action
+        return [...prev, DeleteTranslationAction]
+      }
+
+      return prev
+    },
   },
 })
